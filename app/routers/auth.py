@@ -18,11 +18,11 @@ def login(user_credentials: users.UserLogin, db: Session = Depends(get_db)):
     user = db.query(models.User).filter(models.User.email == user_credentials.email).first()
 
     if not user:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail=f"Invalid email or password ")
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=f"Invalid email or password")
 
     
     if not hash.verify_hash(user_credentials.password, user.password):
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail=f"Invalid email or password")
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=f"Invalid email or password")
 
 
     # Create a token

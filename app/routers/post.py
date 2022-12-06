@@ -43,8 +43,8 @@ def find_index_post(id):
 
 # Get all Posts
 @router.get("/", 
-    status_code=status.HTTP_200_OK
-    , response_model=List[posts.PostwithVote]
+    status_code=status.HTTP_200_OK,
+    response_model=List[posts.PostwithVote]
 )
 def get_posts(db: Session = Depends(get_db), limit: int = 2, skip: int = 0, search: Optional[str] = ""):
     # cursor.execute(""" SELECT * FROM posts """)
@@ -209,8 +209,8 @@ def delete_post(id: int, db: Session = Depends(get_db), current_user: int = Depe
             detail=f"Post with the ID: {id} not available for deletion"
         )
     
-    if post.user_id != current_user.id:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not Authorized: Not the Owner of the Post!")
+    # if post.user_id != current_user.id:
+    #     raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not Authorized: Not the Owner of the Post!")
 
     post.delete(synchronize_session=False)
 
