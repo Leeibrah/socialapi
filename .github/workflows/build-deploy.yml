@@ -73,13 +73,23 @@ jobs:
           heroku_app_name: ${{secrets.HEROKU_APP_NAME}}
           heroku_email: ${{secrets.HEROKU_EMAIL}}
 
-      - name: deploy to ubuntu server
-        uses: appleboy/ssh-action@master
+      #   - name: deploy to ubuntu server
+      #     uses: appleboy/ssh-action@master
+      #     with:
+      #       host: ${{secrets.PROD_HOST}}
+      #       username: ${{secrets.PROD_USERNAME}}
+      #       password: ${{secrets.PROD_PASSWORD}}
+      #       script: |
+      #         cd app/src
+      #         git pull
+      #         echo ${{secrets.PROD_PASSWORD}} | sudo -S systemctl restart api
+
+      - name: Login to Resavi Server
+        uses: fifsky/ssh-action@master
         with:
-          host: ${{secrets.PROD_HOST}}
-          username: ${{secrets.PROD_USERNAME}}
-          password: ${{secrets.PROD_PASSWORD}}
-          script: |
-            cd app/src
-            git pull
-            echo ${{secrets.PROD_PASSWORD}} | sudo -S systemctl restart api
+          command: |
+            host: ${{ secrets.HOST }}
+            user: root
+            key: ${{ secrets.PRIVATE_KEY}}
+            cd /var/www
+            touch work.md
