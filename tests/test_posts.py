@@ -118,7 +118,7 @@ def tes_delete_post(authorized_client, test_user, test_posts):
 
 
 
-def test_delete_post_non_exist(authorized_client, test_user, test_posts):
+def tes_delete_post_non_exist(authorized_client, test_user, test_posts):
     res = authorized_client.delete(f"/posts/67")
 
     assert res.status_code == 404
@@ -168,7 +168,7 @@ def tes_unathorized_user_update_post(client, test_user, test_posts):
     assert res.status_code == 401
 
 
-def test_update_post_non_exist(authorized_client, test_user, test_posts):
+def tes_update_post_non_exist(authorized_client, test_user, test_posts):
 
     data = {
         "title": "Updated Title",
