@@ -39,6 +39,6 @@ app.include_router(vote.router)
 
 @app.get("/")
 async def root():
-    return {"message": "Python API Application made using FastAPI!"}
+    return {"message": "Python API Application made using FastAPI! Deployed from CI/CD pipeline."}
 
 
