@@ -94,10 +94,7 @@ def tes_get_one_post(authorized_client, test_posts):
     assert post.Post.published == test_posts[0].published
 
 
-
-
-
-def test_unauthorized_user_create_post(client, test_posts):
+def tes_unauthorized_user_create_post(client, test_posts):
     res = client.post("/posts/", json = {
         "title": "title 1",
         "content": "content of title 1",
@@ -107,14 +104,14 @@ def test_unauthorized_user_create_post(client, test_posts):
     assert res.status_code == 401
 
 
-def test_unathorized_user_delete_post(client, test_user, test_posts):
+def tes_unathorized_user_delete_post(client, test_user, test_posts):
     res = client.delete(f"/posts/{test_posts[0].id}")
 
     print(res.status_code)
     assert res.status_code == 401
 
 
-def test_delete_post(authorized_client, test_user, test_posts):
+def tes_delete_post(authorized_client, test_user, test_posts):
     res = authorized_client.delete(f"/posts/{test_posts[0].id}")
 
     assert res.status_code == 204
@@ -127,14 +124,14 @@ def test_delete_post_non_exist(authorized_client, test_user, test_posts):
     assert res.status_code == 404
 
 
-def test_delete_other_user_post(authorized_client, test_user, test_posts):
+def tes_delete_other_user_post(authorized_client, test_user, test_posts):
     res = authorized_client.delete(f"/posts/{test_posts[3].id}")
 
     # assert res.status_code == 403
     assert res.status_code == 204
 
 
-def test_update_post(authorized_client, test_user, test_posts):
+def tes_update_post(authorized_client, test_user, test_posts):
 
     data = {
         "title": "Updated Title",
@@ -151,7 +148,7 @@ def test_update_post(authorized_client, test_user, test_posts):
     assert updated_post.content == data['content']
 
 
-def test_update_other_user_post(authorized_client, test_user, test_user2, test_posts):
+def tes_update_other_user_post(authorized_client, test_user, test_user2, test_posts):
 
     data = {
         "title": "Updated Title",
@@ -164,7 +161,7 @@ def test_update_other_user_post(authorized_client, test_user, test_user2, test_p
     assert res.status_code == 403
 
 
-def test_unathorized_user_update_post(client, test_user, test_posts):
+def tes_unathorized_user_update_post(client, test_user, test_posts):
     res = client.put(f"/posts/{test_posts[0].id}")
 
     print(res.status_code)
