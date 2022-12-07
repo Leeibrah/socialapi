@@ -10,7 +10,7 @@ from app import schemas
     ("Title Quatre", "C'est le titre quatre", False),
     ("Title Cinq", "C'est le titre cinq", True)
 ])
-def t_create_post(authorized_client, test_user, test_posts, title, content, published):
+def tes_create_post(authorized_client, test_user, test_posts, title, content, published):
     res = authorized_client.post("/posts/", json = {
         "title": title,
         "content": content,
@@ -27,7 +27,7 @@ def t_create_post(authorized_client, test_user, test_posts, title, content, publ
 
 
 
-def test_create_post_default_published_true(authorized_client, test_user):
+def tes_create_post_default_published_true(authorized_client, test_user):
 
     res = authorized_client.post("/posts/", json = {
         "title": "title 1",
@@ -43,8 +43,7 @@ def test_create_post_default_published_true(authorized_client, test_user):
     assert created_post.user.id == test_user['id']
 
 
-def test_get_all_posts(authorized_client, test_posts):
-# def t_get_all_posts(authorized_client, test_posts):
+def tes_get_all_posts(authorized_client, test_posts):
     res = authorized_client.get("/posts/")
 
     def validate(post):
@@ -61,8 +60,7 @@ def test_get_all_posts(authorized_client, test_posts):
     assert post_list[0].Post.id == test_posts[0].id
 
 
-def test_unauthorized_user_get_all_posts(client, test_posts):
-# def t_unauthorized_user_get_all_posts(client, test_posts):
+def tes_unauthorized_user_get_all_posts(client, test_posts):
     res = client.get("/posts/loggedin/user")
 
     print(res.status_code)
