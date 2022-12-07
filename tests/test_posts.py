@@ -10,7 +10,7 @@ from app import schemas
     ("Title Quatre", "C'est le titre quatre", False),
     ("Title Cinq", "C'est le titre cinq", True)
 ])
-def test_create_post(authorized_client, test_user, test_posts, title, content, published):
+def t_create_post(authorized_client, test_user, test_posts, title, content, published):
     res = authorized_client.post("/posts/", json = {
         "title": title,
         "content": content,
